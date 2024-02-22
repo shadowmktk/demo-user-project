@@ -59,6 +59,8 @@ spec:
         value: $(params.REVISION)
       - name: subdirectory
         value: deployment
+      - name: sslVerify
+        value: false
     - name: manifest-update
       runAfter:
       - git-clone-deployment
