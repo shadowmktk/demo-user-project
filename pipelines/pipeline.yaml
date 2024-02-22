@@ -60,6 +60,9 @@ spec:
     - name: manifest-update
       runAfter:
       - git-clone-deployment
+      podTemplate:
+        securityContext:
+          fsGroup: 65532
       taskRef:
         resolver: cluster
         params:
