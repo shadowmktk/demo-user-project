@@ -99,3 +99,6 @@ spec:
   - name: source-volume
     persistentVolumeClaim:
       claimName: source-pvc
+  - name: ssh-directory
+    secret:
+      secretName: gitlab-ssh-key
