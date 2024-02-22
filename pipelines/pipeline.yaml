@@ -57,6 +57,41 @@ spec:
         value: $(params.REVISION)
       - name: subdirectory
         value: deployment
+    - name: manifest-update
+      runAfter:
+      - git-clone-deployment
+      taskRef:
+        # https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-cli/0.4/git-cli.yaml
+        resolver: cluster
+        params:
+        - name: name
+          value: git-clone
+        - name: kind
+          value: task
+        - name: namespace
+          value: default
+      workspaces:
+      - name: source
+        workspace: source-volume
+      params:
+      - name: OLD_IMAGE
+        value: "harbor.example.com/example-project/devops-sample"
+      - name: NEW_IMAGE
+        value: $(tasks.git-clone.results.commit)
+      - name: BASE_IMAGE
+        value: registry.cn-hangzhou.aliyuncs.com/cloud-native-cn/git-init:v0.40.2
+      - name: GIT_USER_NAME
+        value: pipelinerobot
+      - name: GIT_USER_EMAIL
+        value: pipelinerobot@nautes.io
+      - name: GIT_SCRIPT
+        value: |
+          cd deployment
+          ls -lh
+          #sed -i -e "s#${OLD_IMAGE}.*#${NEW_IMAGE}#g" deployments/test/devops-sample.yaml
+          #git add deployments/test/devops-sample.yaml
+          #git commit -a -m "automatic update by pipeline bot: $(tasks.image-build.results.IMAGE_URL)"
+          #git push origin HEAD:$(params.REVISION) --force
     workspaces:
     - name: source-volume
   workspaces:
