@@ -52,7 +52,7 @@ spec:
         workspace: source-volume
       params:
       - name: url
-        value: https://github.com/shadowmktk/demo-user-deployments
+        value: git@github.com:shadowmktk/demo-user-deployments.git
       - name: revision
         value: $(params.REVISION)
       - name: subdirectory
