@@ -57,6 +57,33 @@ spec:
         value: $(params.REVISION)
       - name: subdirectory
         value: deployment
+    - name: manifest-update
+      runAfter:
+      - git-clone-deployment
+      taskRef:
+        resolver: cluster
+        params:
+        - name: name
+          value: git-cli
+        - name: kind
+          value: task
+        - name: namespace
+          value: default
+      workspaces:
+      - name: source
+        workspace: source-volume
+      params:
+      - name: BASE_IMAGE
+        value: registry.cn-hangzhou.aliyuncs.com/cloud-native-cn/git-init:v0.40.2
+      - name: GIT_USER_NAME
+        value: pipelinerobot
+      - name: GIT_USER_EMAIL
+        value: pipelinerobot@nautes.io
+      - name: GIT_SCRIPT
+        value: |
+          cd deployment
+          ls deployments
+      
     workspaces:
     - name: source-volume
   workspaces:
