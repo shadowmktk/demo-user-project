@@ -2,7 +2,6 @@ apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   name: example-pipiline
-  namespace: example-pipelines
 spec:
   params:
   - name: REVISION
@@ -16,6 +15,7 @@ spec:
     tasks:
     - name: git-clone-sourcecode
       taskRef:
+        resolver: cluster
         params:
         - name: name
           value: git-clone
@@ -37,6 +37,7 @@ spec:
       runAfter:
       - git-clone-sourcecode
       taskRef:
+        resolver: cluster
         params:
         - name: name
           value: git-clone
