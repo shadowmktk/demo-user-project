@@ -82,6 +82,7 @@ spec:
       - name: GIT_SCRIPT
         value: |
           ls -al ~/
+          cat ~/.gitconfig
           echo "Hello World!"
           cd deployment
           sed -i "s@nginx:.*@nginx:$(tasks.git-clone-sourcecode.results.commit)@g" deployments/test/devops-sample.yaml
