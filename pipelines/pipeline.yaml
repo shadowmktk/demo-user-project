@@ -84,13 +84,12 @@ spec:
         value: pipelinerobot@nautes.io
       - name: GIT_SCRIPT
         value: |
-          ls -al ~/.ssh
-          git clone https://mirror.ghproxy.com/https://github.com/shadowmktk/demo-user-deployments
-          ls -lh
-          ls -lh demo-user-deployments
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65532
+          cd deployment
+          sed -i -e "s#nginx:.*#nginx:$(tasks.git-clone-sourcecode.results.commit)#g" deployments/test/devops-sample.yaml
+          git config --global --add safe.directory /workspace/source/deployment
+          git add deployments/test/devops-sample.yaml
+          git commit -a -m "automatic update by pipeline bot: $(tasks.git-clone-sourcecode.results.commit)"
+          git push origin HEAD:$(params.REVISION) --force
     workspaces:
     - name: source-volume
   workspaces:
