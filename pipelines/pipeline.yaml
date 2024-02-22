@@ -81,7 +81,7 @@ spec:
         value: pipelinerobot@nautes.io
       - name: GIT_SCRIPT
         value: |
-          ls ~/
+          ls -al ~/
           echo "Hello World!"
           cd deployment
           sed -i "s@nginx:.*@nginx:$(tasks.git-clone-sourcecode.results.commit)@g" deployments/test/devops-sample.yaml
