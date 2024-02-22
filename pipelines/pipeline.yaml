@@ -72,6 +72,9 @@ spec:
       workspaces:
       - name: source
         workspace: source-volume
+      - name: ssh-directory
+        secret:
+          secretName: gitlab-ssh-key
       params:
       - name: BASE_IMAGE
         value: registry.cn-hangzhou.aliyuncs.com/cloud-native-cn/git-cli:root-2.39
