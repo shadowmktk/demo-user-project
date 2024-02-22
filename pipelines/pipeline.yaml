@@ -59,7 +59,7 @@ spec:
         value: deployment
     - name: manifest-update
       runAfter:
-      - git-clone-deployment
+      - git-clone
       taskRef:
         # https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-cli/0.4/git-cli.yaml
         resolver: cluster
@@ -74,10 +74,6 @@ spec:
       - name: source
         workspace: source-volume
       params:
-      - name: OLD_IMAGE
-        value: "harbor.example.com/example-project/devops-sample"
-      - name: NEW_IMAGE
-        value: $(tasks.git-clone.results.commit)
       - name: BASE_IMAGE
         value: registry.cn-hangzhou.aliyuncs.com/cloud-native-cn/git-init:v0.40.2
       - name: GIT_USER_NAME
