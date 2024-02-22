@@ -50,6 +50,8 @@ spec:
       workspaces:
       - name: output
         workspace: source-volume
+      - name: ssh-directory
+        workspace: ssh-directory
       params:
       - name: url
         value: git@github.com:shadowmktk/demo-user-deployments.git
