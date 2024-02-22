@@ -81,9 +81,13 @@ spec:
         value: pipelinerobot@nautes.io
       - name: GIT_SCRIPT
         value: |
+          ls ~/
           echo "Hello World!"
           cd deployment
-          ls deployments
+          sed -i "s@nginx:.*@nginx:$(tasks.git-clone-sourcecode.results.commit)@g" deployments/test/devops-sample.yaml
+          git add deployments/test/devops-sample.yaml
+          git commit -a -m "automatic update by pipeline bot: $(tasks.git-clone-sourcecode.results.commit)"
+          git push origin HEAD:$(params.REVISION) --force
       
     workspaces:
     - name: source-volume
