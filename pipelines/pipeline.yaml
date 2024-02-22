@@ -60,9 +60,6 @@ spec:
     - name: manifest-update
       runAfter:
       - git-clone-deployment
-      podTemplate:
-        securityContext:
-          fsGroup: 65532
       taskRef:
         resolver: cluster
         params:
@@ -79,7 +76,8 @@ spec:
         workspace: ssh-directory
       params:
       - name: BASE_IMAGE
-        value: registry.cn-hangzhou.aliyuncs.com/cloud-native-cn/git-cli:root-2.39
+        #value: registry.cn-hangzhou.aliyuncs.com/cloud-native-cn/git-cli:root-2.39
+        value: registry.cn-hangzhou.aliyuncs.com/cloud-native-cn/git-init:v0.40.2
       - name: GIT_USER_NAME
         value: pipelinerobot
       - name: GIT_USER_EMAIL
@@ -90,7 +88,9 @@ spec:
           git clone https://mirror.ghproxy.com/https://github.com/shadowmktk/demo-user-deployments
           ls -lh
           ls -lh demo-user-deployments
-      
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
     workspaces:
     - name: source-volume
   workspaces:
