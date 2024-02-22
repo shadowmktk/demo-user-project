@@ -28,7 +28,7 @@ spec:
         workspace: source-volume
       params:
       - name: url
-        value: https://github.com/shadowmktk/demo-user-project
+        value: https://mirror.ghproxy.com/https://github.com/shadowmktk/demo-user-project
       - name: revision
         value: $(params.REVISION)
       - name: subdirectory
@@ -50,7 +50,7 @@ spec:
         workspace: source-volume
       params:
       - name: url
-        value: https://github.com/shadowmktk/demo-user-deployments
+        value: https://mirror.ghproxy.com/https://github.com/shadowmktk/demo-user-deployments
       - name: revision
         value: $(params.REVISION)
       - name: subdirectory
