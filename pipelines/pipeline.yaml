@@ -92,7 +92,7 @@ spec:
         value: |
           cd deployment
           sed -i -e "s#nginx:.*#nginx:$(tasks.git-clone-sourcecode.results.commit)#g" deployments/test/devops-sample.yaml
-          git config --global --add safe.directory $(workspaces.source.path)/$subdirectory
+          git config --global --add safe.directory $(workspaces.source.path)/deployment
           git add deployments/test/devops-sample.yaml
           git commit -a -m "automatic update by pipeline bot: $(tasks.git-clone-sourcecode.results.commit)"
           git push origin HEAD:$(params.REVISION) --force
