@@ -76,8 +76,7 @@ spec:
         workspace: ssh-directory
       params:
       - name: BASE_IMAGE
-        #value: registry.cn-hangzhou.aliyuncs.com/cloud-native-cn/git-cli:root-2.39
-        value: registry.cn-hangzhou.aliyuncs.com/cloud-native-cn/git-init:v0.40.2
+        value: registry.cn-hangzhou.aliyuncs.com/cloud-native-cn/git-cli:root-2.39
       - name: GIT_USER_NAME
         value: pipelinerobot
       - name: GIT_USER_EMAIL
